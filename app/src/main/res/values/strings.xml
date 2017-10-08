@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Veggie Treasures</string>
+    <string name="app_close_msg">The app is going to get closed.</string>
+</resources>
