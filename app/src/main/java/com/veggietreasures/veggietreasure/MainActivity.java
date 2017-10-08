@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,7 +64,15 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setEnableSmoothTransition(true);
         //For WebView site performance
 
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new com.veggietreasures.veggietreasure.VtWebClient(){
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                //hide loading image
+                findViewById(R.id.progressBar1).setVisibility(View.GONE);
+                //show webview
+                findViewById(R.id.webView).setVisibility(View.VISIBLE);
+            }}
+        );
 
         webView.loadUrl("http://www.veggietreasures.com");
     }
