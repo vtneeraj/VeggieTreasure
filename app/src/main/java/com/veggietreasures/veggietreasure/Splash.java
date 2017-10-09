@@ -8,6 +8,10 @@ import android.os.Bundle;
  */
 
 public class Splash extends Activity {
+
+
+    private static int SPLASH_TIME_OUT=10000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +23,7 @@ public class Splash extends Activity {
         Thread t =new Thread(){
             public void run(){
                 try{
-                    sleep(10000);
+                    sleep(SPLASH_TIME_OUT);
                 }catch(InterruptedException e){
                     e.printStackTrace();
                 }finally{
