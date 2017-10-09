@@ -7,11 +7,10 @@
     tools:context=".Splash" >
 
 
-
-    <pl.droidsonroids.gif.GifImageView
+    <com.felipecsl.gifimageview.library.GifImageView
+        android:id="@+id/gifImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/vtgif"
         />
 
 </RelativeLayout>
