@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Veggie Treasures</string>
     <string name="app_close_msg">The app is going to get closed.</string>
+    <string name="vt_InterstitialAdunit">ca-app-pub-7860044632533199/4391988734</string>
+    <string name="vt_bottomAdBanner">ca-app-pub-7860044632533199/5681019674</string>
+
 </resources>

@@ -6,36 +6,48 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+
 public class MainActivity extends AppCompatActivity {
 
+    private AdView mAdView;
 
+    private InterstitialAd mInterstitialAd;
 
     WebView webView;
 
     @Override
     public void onBackPressed() {
         if(webView.canGoBack()){
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+                mInterstitialAd.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdClosed() {
+                        super.onAdClosed();
+
+                    }
+                });
+            }
             webView.goBack();
         }else{
-            super.onBackPressed();
-            /*AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder
-                    .setTitle("Exiting the Application")
-                    .setMessage("Are you sure?")
-                    .setIcon(R.mipmap.ic_launcher)
-                    //.setIcon(android.R.drawable.ic_dialog_alert)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            //Yes button clicked, do something
-                            Toast.makeText(MainActivity.this, "Yes button pressed",
-                                    Toast.LENGTH_SHORT).show();
-                            finish();
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+                mInterstitialAd.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdClosed() {
+                        super.onAdClosed();
 
-                        }
-                    })
-                    .setNegativeButton("No", null)						//Do nothing on no
-                    .show();*/
+                    }
+                });
+            }
+            super.onBackPressed();
         }
+
+
 
     }
 
@@ -77,7 +89,45 @@ public class MainActivity extends AppCompatActivity {
         );
 
         webView.loadUrl("http://www.veggietreasures.com");
+
+
+
+        //Ad units - Banner
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        //Ad units - Interstitial
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("");
+
+        // Prepare the Interstitial Ad
+        mInterstitialAd = new InterstitialAd(MainActivity.this);
+        // Insert the Ad Unit ID
+        mInterstitialAd.setAdUnitId(getString(R.string.vt_InterstitialAdunit));
+
+        mInterstitialAd.loadAd(adRequest);
+
+        // Prepare an Interstitial Ad Listener
+        /*mInterstitialAd.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                // Call displayInterstitial() function
+                displayInterstitial();
+            }
+        });*/
+
     }
+    public void displayInterstitial() {
+    // If Ads are loaded, show Interstitial else show nothing.
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
+    }
+
+
+
+
+
 
 
 }
