@@ -50,8 +50,25 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
-            //buildDialog(MainActivity.this,"Thanks for visiting us","Thanks").show();
-            super.onBackPressed();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder
+                    .setTitle("Veggie Treasures")
+                    .setMessage("Thanks for visiting us")
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setPositiveButton("Thanks", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //Yes button clicked, do something
+                            Toast.makeText(MainActivity.this, "Do visit again",
+                                    Toast.LENGTH_SHORT).show();
+                            finish();
+
+                        }
+                    })
+                    //.setNegativeButton("No", null)						//Do nothing on no
+                    .show();
+
+            //super.onBackPressed();
         }
 
 
